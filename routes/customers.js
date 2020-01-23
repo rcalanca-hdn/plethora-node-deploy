@@ -26,7 +26,12 @@ router.get("/:id", getCustomer, (req, res) => {
 //Post
 router.post("/", async (req, res) => {
   let customer = new Customer({
-    UserId: req.body.UserId,
+    //Usuario
+    Username: req.body.Username,
+    Password: req.body.Password,
+    Email: req.body.Email,
+    ProfileType: req.body.ProfileType,
+
     Name: req.body.Name,
     LastName: req.body.LastName,
     Document: req.body.Document,
@@ -265,9 +270,9 @@ router.get("/:id/relationship-rule", async (req, res) => {
           {
             Title: "Agenda Enfermeira",
             StartDate: "20/10/2019",
-            EndDate: "21/10/2019",
-            Status: "Enviado"
-          },
+            EndDate: "-",
+            Status: ""
+          }
         ]
       },
       {
@@ -289,9 +294,9 @@ router.get("/:id/relationship-rule", async (req, res) => {
           {
             Title: "Agenda Enfermeira",
             StartDate: "20/10/2019",
-            EndDate: "21/10/2019",
-            Status: "Enviado"
-          },
+            EndDate: "-",
+            Status: "Pendência"
+          }
         ]
       },
       {
@@ -315,9 +320,9 @@ router.get("/:id/relationship-rule", async (req, res) => {
             StartDate: "20/10/2019",
             EndDate: "21/10/2019",
             Status: "Enviado"
-          },
+          }
         ]
-      },
+      }
     ];
     res.status(200).send(rule);
   } catch (err) {
