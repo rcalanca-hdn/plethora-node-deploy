@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
         RequesterName: "Dr. Renan",
         Patient: "Mauricios de Souza",
         Subject: "Agendamento"
-      },
+      }
     ];
 
     res.status(200).send(tasks);

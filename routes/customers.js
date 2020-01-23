@@ -6,19 +6,6 @@ const jwt = require("jsonwebtoken");
 //Get all
 router.get("/", async (req, res) => {
   try {
-    let token = req.headers["authorization"];
-    if (!token)
-      return res
-        .status(401)
-        .send({ auth: false, message: "No token provided." });
-
-    jwt.verify(token, process.env.SECRET, function(err, decoded) {
-      if (err)
-        return res
-          .status(500)
-          .send({ auth: false, message: "Failed to authenticate token." });
-    });
-
     let customers = await Customer.find();
 
     res.status(200).send(customers);
@@ -30,19 +17,6 @@ router.get("/", async (req, res) => {
 //Get One Custermer by id
 router.get("/:id", getCustomer, (req, res) => {
   try {
-    let token = req.headers["authorization"];
-    if (!token)
-      return res
-        .status(401)
-        .send({ auth: false, message: "No token provided." });
-
-    jwt.verify(token, process.env.SECRET, function(err, decoded) {
-      if (err)
-        return res
-          .status(500)
-          .send({ auth: false, message: "Failed to authenticate token." });
-    });
-
     res.status(200).send(res.customer);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -51,17 +25,6 @@ router.get("/:id", getCustomer, (req, res) => {
 
 //Post
 router.post("/", async (req, res) => {
-  let token = req.headers["authorization"];
-  if (!token)
-    return res.status(401).send({ auth: false, message: "No token provided." });
-
-  jwt.verify(token, process.env.SECRET, function(err, decoded) {
-    if (err)
-      return res
-        .status(500)
-        .send({ auth: false, message: "Failed to authenticate token." });
-  });
-
   let customer = new Customer({
     UserId: req.body.UserId,
     Name: req.body.Name,
@@ -121,22 +84,18 @@ router.post("/", async (req, res) => {
 
 //Put
 router.put("/:id", getCustomer, async (req, res) => {
-  let token = req.headers["authorization"];
-  if (!token)
-    return res.status(401).send({ auth: false, message: "No token provided." });
-
-  jwt.verify(token, config.secret, function(err, decoded) {
-    if (err)
-      return res
-        .status(500)
-        .send({ auth: false, message: "Failed to authenticate token." });
-
-    res.status(200).send(decoded);
-  });
-
   try {
-    let updateCustomer = await res.customer.save();
-    res.status(200).send(updateCustomer);
+    let customerUpdated = req.body;
+
+    Customer.updateOne({ _id: req.params.id }, customerUpdated, function(
+      err,
+      customerUpdated
+    ) {
+      if (err) {
+        res.status(400).json({ message: err.message });
+      }
+      res.status(200).send();
+    });
   } catch {
     res.status(400).json({ message: err.message });
   }
@@ -145,18 +104,18 @@ router.put("/:id", getCustomer, async (req, res) => {
 //Delete
 router.delete("/:id", getCustomer, async (req, res) => {
   try {
-    let token = req.headers["authorization"];
-    if (!token)
-      return res
-        .status(401)
-        .send({ auth: false, message: "No token provided." });
+    // let token = req.headers["authorization"];
+    // if (!token)
+    //   return res
+    //     .status(401)
+    //     .send({ auth: false, message: "No token provided." });
 
-    jwt.verify(token, process.env.SECRET, function(err, decoded) {
-      if (err)
-        return res
-          .status(500)
-          .send({ auth: false, message: "Failed to authenticate token." });
-    });
+    // jwt.verify(token, process.env.SECRET, function(err, decoded) {
+    //   if (err)
+    //     return res
+    //       .status(500)
+    //       .send({ auth: false, message: "Failed to authenticate token." });
+    // });
 
     await res.customer.remove();
     res.status(200).send({ message: "Customer deleted" });
@@ -193,23 +152,6 @@ async function getCustomerByUserId(req, res, next) {
 
 router.get("/byUserId/:id", getCustomerByUserId, (req, res) => {
   try {
-    // let token = req.headers["authorization"];
-    // if (!token)
-    //   res
-    //     .status(401)
-    //     .send({ auth: false, message: "No token provided." });
-    //     return
-    //     console.log(token);
-
-    // jwt.verify(token, process.env.SECRET, function(err, decoded) {
-    //   if (err)
-    //   console.log(err);
-    //   res
-    //       .status(500)
-    //       .send({ auth: false, message: "Failed to authenticate token." });
-    //       return;
-    // });
-
     res.status(200).send(res.customer);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -296,6 +238,28 @@ router.get("/:id/historic", async (req, res) => {
     ];
 
     res.status(200).send(historic);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.get("/:id/relationship-rule", async (req, res) => {
+  try {
+    let rule = [
+      {
+        Type: "Cadastro",
+        Percentage: "20",
+        Content: [
+          {
+            Title: "Questionário de Boas Vindas",
+            StartDate: "20/10/2019",
+            EndDate: "21/10/2019",
+            Status: "Enviado"
+          }
+        ]
+      }
+    ];
+    res.status(200).send(rule);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

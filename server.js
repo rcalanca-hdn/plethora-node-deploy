@@ -13,6 +13,7 @@ app.use("/api/users", require("./routes/users"));
 app.use("/api/customers", require("./routes/customers"));
 app.use("/api/alerta", require("./routes/alerta"));
 app.use("/api/task", require("./routes/task"));
+app.use("/api/graphic", require("./routes/graphic"));
 
 app.listen(process.env.PORT || 5000, () =>
   console.log("Server Started on Port 5000!")
