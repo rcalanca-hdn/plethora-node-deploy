@@ -248,6 +248,30 @@ router.get("/:id/relationship-rule", async (req, res) => {
     let rule = [
       {
         Type: "Cadastro",
+        Percentage: "75",
+        Content: [
+          {
+            Title: "Questionário de Boas Vindas",
+            StartDate: "20/10/2019",
+            EndDate: "21/10/2019",
+            Status: "Enviado"
+          },
+          {
+            Title: "Agendamento da Entrega do kit",
+            StartDate: "20/10/2019",
+            EndDate: "21/10/2019",
+            Status: "Realizado"
+          },
+          {
+            Title: "Agenda Enfermeira",
+            StartDate: "20/10/2019",
+            EndDate: "21/10/2019",
+            Status: "Enviado"
+          },
+        ]
+      },
+      {
+        Type: "Acesso",
         Percentage: "20",
         Content: [
           {
@@ -255,9 +279,45 @@ router.get("/:id/relationship-rule", async (req, res) => {
             StartDate: "20/10/2019",
             EndDate: "21/10/2019",
             Status: "Enviado"
-          }
+          },
+          {
+            Title: "Agendamento da Entrega do kit",
+            StartDate: "20/10/2019",
+            EndDate: "21/10/2019",
+            Status: "Realizado"
+          },
+          {
+            Title: "Agenda Enfermeira",
+            StartDate: "20/10/2019",
+            EndDate: "21/10/2019",
+            Status: "Enviado"
+          },
         ]
-      }
+      },
+      {
+        Type: "Adesão",
+        Percentage: "85",
+        Content: [
+          {
+            Title: "Questionário de Boas Vindas",
+            StartDate: "20/10/2019",
+            EndDate: "21/10/2019",
+            Status: "Enviado"
+          },
+          {
+            Title: "Agendamento da Entrega do kit",
+            StartDate: "20/10/2019",
+            EndDate: "21/10/2019",
+            Status: "Realizado"
+          },
+          {
+            Title: "Agenda Enfermeira",
+            StartDate: "20/10/2019",
+            EndDate: "21/10/2019",
+            Status: "Enviado"
+          },
+        ]
+      },
     ];
     res.status(200).send(rule);
   } catch (err) {

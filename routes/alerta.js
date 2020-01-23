@@ -7,31 +7,31 @@ router.get("/", async (req, res) => {
       {
         Title: "Documento Ilegível",
         Subtitle: "Xpto",
-        Route: "minha-conta",
+        Route: "my-account",
         ButtonDescription: "Resolver"
       },
       {
         Title: "Medicamento Esgotando",
         Subtitle: "XptoXptoXptoXptoXpto",
-        Route: "minha-conta",
+        Route: "my-account",
         ButtonDescription: "Resolver"
       },
       {
         Title: "Dados Incorretos",
         Subtitle: "Solve",
-        Route: "minha-conta",
+        Route: "my-account",
         ButtonDescription: "Resolver"
       },
       {
         Title: "Indicar Cuidador",
         Subtitle: "Solve test 3",
-        Route: "minha-conta",
+        Route: "my-account",
         ButtonDescription: "Resolver"
       },
       {
         Title: "Indicar Médico",
         Subtitle: "Solve test 3",
-        Route: "/minha-conta",
+        Route: "my-account",
         ButtonDescription: "Resolver"
       }
     ];
