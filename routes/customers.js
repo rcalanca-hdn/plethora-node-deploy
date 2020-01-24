@@ -41,15 +41,15 @@ router.post("/", async (req, res) => {
     Gender: req.body.Gender,
 
     //Second Step
-    AddressName: req.body.Address.AddressName,
-    PostalCode: req.body.Address.PostalCode,
-    Address: req.body.Address.Address,
-    Number: req.body.Address.Number,
-    Complement: req.body.Address.Complement,
-    Neighborhood: req.body.Address.Neighborhood,
-    City: req.body.Address.City,
-    State: req.body.Address.State,
-    ReferencePoint: req.body.Address.ReferencePoint,
+    AddressName: req.body.AddressName,
+    PostalCode: req.body.PostalCode,
+    Address: req.body.Address,
+    Number: req.body.Number,
+    Complement: req.body.Complement,
+    Neighborhood: req.body.Neighborhood,
+    City: req.body.City,
+    State: req.body.State,
+    ReferencePoint: req.body.ReferencePoint,
 
     //Third
     SymptomsDescription: req.body.SymptomsDescription,
