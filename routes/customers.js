@@ -27,6 +27,7 @@ router.get("/:id", getCustomer, (req, res) => {
 router.post("/", async (req, res) => {
   let customer = new Customer({
     //Usuario
+    UserId: req.body.UserId,
     Username: req.body.Username,
     Password: req.body.Password,
     Email: req.body.Email,
